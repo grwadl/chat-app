@@ -1,0 +1,14 @@
+services:
+  chat-app-db:
+    image: mysql:latest
+    container_name: chat-db
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - .env
+    volumes:
+      - movie-db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  movie-db:
+    driver: local
