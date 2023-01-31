@@ -1,0 +1,8 @@
+type Query {
+  users(name: String): [User]
+  messages(userName: String!): [Message]!
+}
+
+type Mutation {
+  user(userName: String!): User!
+}

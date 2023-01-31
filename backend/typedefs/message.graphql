@@ -1,0 +1,4 @@
+type Message {
+  author: User!
+  text: String!
+}

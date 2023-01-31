@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 // npm install @apollo/server express graphql cors body-parser
 const server_1 = require("@apollo/server");
 const express4_1 = require("@apollo/server/express4");
