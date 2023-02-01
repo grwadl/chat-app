@@ -6,10 +6,14 @@ async function writeToStorage(key: string, value: string): Promise<void> {
 
 async function readFromStorage(key: string): Promise<string | null> {
   try {
-    return AsyncStorage.getItem(key);
+    return await AsyncStorage.getItem(key);
   } catch (err) {
     return null;
   }
 }
 
-export { writeToStorage, readFromStorage };
+async function clearStorage(): Promise<void> {
+  AsyncStorage.clear();
+}
+
+export { writeToStorage, readFromStorage, clearStorage };

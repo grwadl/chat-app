@@ -6,9 +6,7 @@ export default function App() {
     Montserrat: require("./assets/fonts/Montserrat-Medium.ttf"),
   });
 
-  const isLogined = true;
-
   if (!loaded) return null;
 
-  return <NativeNavigation isLogined={!!isLogined} />;
+  return <NativeNavigation />;
 }

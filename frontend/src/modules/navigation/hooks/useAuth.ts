@@ -1,20 +1,30 @@
+import { User } from "@/entities/user";
+import { VALIDATE_TOKEN } from "@/graphql/queries/validate-token";
 import { readFromStorage } from "@/lib/storage";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { login } from "@/store/actions/user-reducer";
-import { useEffect } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 
 export function useAuth() {
-  const userState = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+  const [shouldTrigger, setShouldTrigger] = useState<boolean>(false);
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+  const [validateToken] = useLazyQuery<User>(VALIDATE_TOKEN);
 
   useEffect(() => {
-    async function checkIsAuthed() {
-      const name = await readFromStorage("name");
-      if (name) dispatch(login());
+    async function checkToken() {
+      const token = await readFromStorage("auth-token");
+
+      if (!token) return;
+
+      const { data, error } = await validateToken({
+        fetchPolicy: "no-cache",
+        variables: {
+          token,
+        },
+      });
+      setIsLogined(!!data && !error);
     }
+    checkToken();
+  }, [shouldTrigger]);
 
-    checkIsAuthed();
-  }, []);
-
-  return userState;
+  return { isLogined: isLogined, setShouldTrigger };
 }
