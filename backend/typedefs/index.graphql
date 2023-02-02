@@ -1,8 +1,30 @@
+input LogInInfo {
+  email: String!
+  password: String!
+}
+
+input RegisterInfo {
+  email: String!
+  password: String!
+  name: String!
+}
+
+type LoginResponse {
+  user: User!
+  token: String!
+}
+
+type RegisterResponse {
+  success: Boolean!
+}
+
 type Query {
   users(name: String): [User]
   messages(userName: String!): [Message]!
+  validateToken(token: String!): LoginResponse!
 }
 
 type Mutation {
-  user(userName: String!): User!
+  signUp(userInfo: RegisterInfo!): RegisterResponse!
+  login(userInfo: LogInInfo!): LoginResponse!
 }

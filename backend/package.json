@@ -16,11 +16,14 @@
   "dependencies": {
     "@apollo/server": "^4.3.2",
     "@prisma/client": "^4.9.0",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
-    "graphql-import-files": "^1.2.19"
+    "graphql-import-files": "^1.2.19",
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.16.5",
@@ -28,6 +31,7 @@
     "@graphql-codegen/typescript-resolvers": "^2.7.13",
     "@types/graphql": "^14.5.0",
     "@types/node": "^18.11.18",
+    "dotenv": "^16.0.3",
     "nodemon": "^2.0.20",
     "prisma": "^4.9.0"
   }
