@@ -1,33 +1,25 @@
-import { User } from "@/entities/user";
-import LOGIN_USER from "@/graphql/mutations/login-user";
 import { writeToStorage } from "@/lib/storage";
-import { useMutation } from "@apollo/client";
+import { userAuthVar } from "@/src/modules/auth/hooks/useAuth";
+import { useLoginMutation } from "@/src/modules/auth/hooks/useLoginMutation";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, TextInput } from "react-native";
 import Container from "../src/components/base/Container";
 import SafeAreaViewCrossPlatform from "../src/components/base/SafeAreaView";
 import MyButton from "../src/components/button";
 import { RootStackParamList } from "../src/modules/navigation/types";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Login"> & {
-  refetch: React.Dispatch<React.SetStateAction<boolean>>;
-};
-type LogInUserPayload = { userInfo: Omit<User, "name"> };
-type LogInUserResponse = { login: { user: User; token: string } };
+type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
-const LogInScreen = ({ navigation, refetch }: Props) => {
+const LogInScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [logInUser, { error, client }] = useMutation<
-    LogInUserResponse,
-    LogInUserPayload
-  >(LOGIN_USER);
+  const { logInUser } = useLoginMutation();
 
   const logIn = async () => {
     if (!email) return;
 
-    const { data } = await logInUser({
+    const { data, errors } = await logInUser({
       variables: {
         userInfo: {
           email,
@@ -36,14 +28,11 @@ const LogInScreen = ({ navigation, refetch }: Props) => {
       },
     });
 
+    if (!data || errors) return;
+
     await writeToStorage("auth-token", data?.login.token ?? "");
-
-    refetch((v) => !v);
+    userAuthVar({ ...data?.login, isLogined: true });
   };
-
-  useEffect(() => {
-    error && alert(error.message);
-  }, [error]);
 
   return (
     <SafeAreaViewCrossPlatform>

@@ -1,14 +1,15 @@
 import ChatScreen from "@/screens/ChatScreen";
 import LogInScreen from "@/screens/LogInScreen";
 import SignUpScreen from "@/screens/SignUpScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { Text } from "react-native";
 import { useAuth } from "../navigation/hooks/useAuth";
-import { RootStackParamList } from "../navigation/types";
+import { Stack } from "./stack";
 
 const Routes = () => {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-  const { isLogined, setShouldTrigger } = useAuth();
+  const { isLogined, loading } = useAuth();
+
+  if (loading) return <Text>Loading</Text>;
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -18,9 +19,7 @@ const Routes = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="Login">
-            {(props) => <LogInScreen {...props} refetch={setShouldTrigger} />}
-          </Stack.Screen>
+          <Stack.Screen name="Login" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}

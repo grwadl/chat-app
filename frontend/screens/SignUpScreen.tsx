@@ -1,32 +1,25 @@
-import { User } from "@/entities/user";
-import SIGN_UP_USER from "@/graphql/mutations/sign-up-user";
 import Container from "@/src/components/base/Container";
 import SafeAreaViewCrossPlatform from "@/src/components/base/SafeAreaView";
 import MyButton from "@/src/components/button";
+import { useSignUpMutation } from "@/src/modules/auth/hooks/useSignUpMutation";
 import { RootStackParamList } from "@/src/modules/navigation/types";
-import { useMutation } from "@apollo/client";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, TextInput } from "react-native";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
-type UserInfo = { userInfo: User };
-type SingUpReturnType = { success: boolean };
 
 const SignUpScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [logInUser, { data, error }] = useMutation<SingUpReturnType, UserInfo>(
-    SIGN_UP_USER
-  );
+  const { signUp } = useSignUpMutation();
 
-  const signUp = async () => {
+  const signUpHandler = async () => {
     if (!email || !password || !name) return;
 
     const userInfo = { email, password, name };
-
-    const { data } = await logInUser({
+    const { data } = await signUp({
       variables: { userInfo },
     });
 
@@ -35,10 +28,6 @@ const SignUpScreen = ({ navigation }: Props) => {
     alert("Now login to your account!");
     navigation.navigate("Login");
   };
-
-  useEffect(() => {
-    error && alert(error);
-  }, [error]);
 
   return (
     <SafeAreaViewCrossPlatform>
@@ -64,7 +53,7 @@ const SignUpScreen = ({ navigation }: Props) => {
         />
         <MyButton
           style={{ marginTop: 20 }}
-          onPress={signUp}
+          onPress={signUpHandler}
           className="px-6 py-3 rounded-lg flex items-center"
         >
           <Text className="text-xl text-white">Sign up</Text>
