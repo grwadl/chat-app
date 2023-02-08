@@ -4,7 +4,7 @@ import SignUpScreen from '@/screens/SignUpScreen'
 import React from 'react'
 import { Text } from 'react-native'
 import { useAuth } from './hooks/useAuth'
-import { Stack } from './stack'
+import { Stack } from '../navigation/stack'
 
 const Routes = () => {
   const { isLogined, loading } = useAuth()
