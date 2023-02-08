@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const SIGN_UP_USER = gql`
   mutation SignUp($userInfo: RegisterInfo!) {
@@ -6,6 +6,6 @@ const SIGN_UP_USER = gql`
       success
     }
   }
-`;
+`
 
-export default SIGN_UP_USER;
+export default SIGN_UP_USER

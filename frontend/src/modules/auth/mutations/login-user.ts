@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const LOGIN_USER = gql`
   mutation ($userInfo: LogInInfo!) {
@@ -10,6 +10,6 @@ const LOGIN_USER = gql`
       token
     }
   }
-`;
+`
 
-export default LOGIN_USER;
+export default LOGIN_USER

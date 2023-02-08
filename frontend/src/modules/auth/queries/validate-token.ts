@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const VALIDATE_TOKEN = gql`
   query ValidateToken($token: String!) {
@@ -10,4 +10,4 @@ export const VALIDATE_TOKEN = gql`
       token
     }
   }
-`;
+`

@@ -1,8 +1,8 @@
-import { User } from "@/entities/user";
+import { User } from '@/entities/user'
 
 export type ValidateTokenResponse = {
   validateToken: {
-    user: User | null;
-    token: string;
-  };
-};
+    user: User | null
+    token: string
+  }
+}

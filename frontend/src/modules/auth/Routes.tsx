@@ -1,15 +1,15 @@
-import ChatScreen from "@/screens/ChatScreen";
-import LogInScreen from "@/screens/LogInScreen";
-import SignUpScreen from "@/screens/SignUpScreen";
-import React from "react";
-import { Text } from "react-native";
-import { useAuth } from "./hooks/useAuth";
-import { Stack } from "./stack";
+import ChatScreen from '@/screens/ChatScreen'
+import LogInScreen from '@/screens/LogInScreen'
+import SignUpScreen from '@/screens/SignUpScreen'
+import React from 'react'
+import { Text } from 'react-native'
+import { useAuth } from './hooks/useAuth'
+import { Stack } from './stack'
 
 const Routes = () => {
-  const { isLogined, loading } = useAuth();
+  const { isLogined, loading } = useAuth()
 
-  if (loading) return <Text>Loading</Text>;
+  if (loading) return <Text>Loading</Text>
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -24,7 +24,7 @@ const Routes = () => {
         </>
       )}
     </Stack.Navigator>
-  );
-};
+  )
+}
 
-export default Routes;
+export default Routes

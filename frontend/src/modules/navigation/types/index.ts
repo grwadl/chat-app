@@ -1,7 +1,7 @@
 type RootStackParamList = {
-  Login: undefined;
-  SignUp: undefined;
-  Chats: undefined;
-};
+  Login: undefined
+  SignUp: undefined
+  Chats: undefined
+}
 
-export type { RootStackParamList };
+export type { RootStackParamList }

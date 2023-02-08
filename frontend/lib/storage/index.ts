@@ -1,19 +1,19 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 async function writeToStorage(key: string, value: string): Promise<void> {
-  AsyncStorage.setItem(key, value);
+  AsyncStorage.setItem(key, value)
 }
 
 async function readFromStorage(key: string): Promise<string | null> {
   try {
-    return await AsyncStorage.getItem(key);
+    return await AsyncStorage.getItem(key)
   } catch (err) {
-    return null;
+    return null
   }
 }
 
 async function clearStorage(): Promise<void> {
-  AsyncStorage.clear();
+  AsyncStorage.clear()
 }
 
-export { writeToStorage, readFromStorage, clearStorage };
+export { writeToStorage, readFromStorage, clearStorage }

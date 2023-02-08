@@ -1,13 +1,13 @@
-import Container from "@/src/components/base/Container";
-import SafeAreaViewCrossPlatform from "@/src/components/base/SafeAreaView";
-import MyButton from "@/src/components/button";
-import { useSignUp } from "@/src/modules/auth/hooks/useSignUp";
-import { RootStackParamList } from "@/src/modules/navigation/types";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
-import { Text, TextInput } from "react-native";
+import Container from '@/src/components/base/Container'
+import SafeAreaViewCrossPlatform from '@/src/components/base/SafeAreaView'
+import MyButton from '@/src/components/button'
+import { useSignUp } from '@/src/modules/auth/hooks/useSignUp'
+import { RootStackParamList } from '@/src/modules/navigation/types'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
+import { Text, TextInput } from 'react-native'
 
-type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+type Props = NativeStackScreenProps<RootStackParamList, 'SignUp'>
 
 const SignUpScreen = ({ navigation }: Props) => {
   const {
@@ -18,7 +18,7 @@ const SignUpScreen = ({ navigation }: Props) => {
     changeNameHandler,
     changePasswordHandler,
     signUpHandler,
-  } = useSignUp(navigation);
+  } = useSignUp(navigation)
 
   return (
     <SafeAreaViewCrossPlatform>
@@ -51,13 +51,13 @@ const SignUpScreen = ({ navigation }: Props) => {
         </MyButton>
         <Text
           className="text-xl mt-5 block text-center"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate('Login')}
         >
           Already have an account?
         </Text>
       </Container>
     </SafeAreaViewCrossPlatform>
-  );
-};
+  )
+}
 
-export default SignUpScreen;
+export default SignUpScreen
