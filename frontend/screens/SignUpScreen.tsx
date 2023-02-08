@@ -43,9 +43,8 @@ const SignUpScreen = ({ navigation }: Props) => {
           className="border  border-gray-200 rounded-md p-2 mt-10 mb-4 text-lg"
         />
         <MyButton
-          style={{ marginTop: 20 }}
           onPress={signUpHandler}
-          className="px-6 py-3 rounded-lg flex items-center"
+          className="px-6 mt-5 py-3 rounded-lg flex items-center"
         >
           <Text className="text-xl text-white">Sign up</Text>
         </MyButton>
