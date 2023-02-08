@@ -7,6 +7,7 @@ import cors from 'cors'
 import express from 'express'
 import { loadFiles } from 'graphql-import-files'
 import http from 'http'
+import { Environment } from './config'
 import { resolvers } from './resolvers'
 
 export interface MyContext {
@@ -46,9 +47,9 @@ async function main(): Promise<void> {
   )
 
   await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve)
+    httpServer.listen({ port: Environment.PORT }, resolve)
   )
-  console.log(`🚀 Server ready at http://localhost:4000/graphql`)
+  console.log(`🚀 Server is listening on ${Environment.PORT}`)
 }
 
 main().catch(console.error)

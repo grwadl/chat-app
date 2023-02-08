@@ -4,4 +4,5 @@ dotenv.config()
 export const Environment = {
   HASH: process.env.HASH,
   TOKEN_KEY: process.env.TOKEN_KEY,
+  PORT: Number(process.env.PORT),
 }
