@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import { NativeNavigation } from "./src/modules/navigation";
+import { Navigation } from "./src/modules/navigation";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -8,5 +8,5 @@ export default function App() {
 
   if (!loaded) return null;
 
-  return <NativeNavigation />;
+  return <Navigation />;
 }

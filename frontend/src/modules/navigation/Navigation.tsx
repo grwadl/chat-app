@@ -1,10 +1,10 @@
-import { client } from "@/graphql/client";
+import { client } from "@/client";
 import { ApolloProvider } from "@apollo/client";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import Routes from "../auth/Routes";
 
-const NativeNavigation = () => {
+const Navigation = () => {
   return (
     <NavigationContainer>
       <ApolloProvider client={client}>
@@ -14,4 +14,4 @@ const NativeNavigation = () => {
   );
 };
 
-export { NativeNavigation };
+export { Navigation };

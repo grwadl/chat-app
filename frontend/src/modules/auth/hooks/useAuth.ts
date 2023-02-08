@@ -1,16 +1,9 @@
-import { User } from "@/entities/user";
-import { VALIDATE_TOKEN } from "@/graphql/queries/validate-token";
-import { readFromStorage } from "@/lib/storage";
+import { VALIDATE_TOKEN } from "../queries/validate-token";
+import { readFromStorage, clearStorage } from "@/lib/storage";
 import { useLazyQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
-import { userAuthVar } from "../../auth/hooks/useAuth";
-
-export type ValidateTokenResponse = {
-  validateToken: {
-    user: User | null;
-    token: string;
-  };
-};
+import { userAuthVar } from "./useAuthVar";
+import { ValidateTokenResponse } from "../types/validate-token-response";
 
 export function useAuth() {
   const authInfo = useReactiveVar(userAuthVar);
@@ -19,6 +12,8 @@ export function useAuth() {
 
   useEffect(() => {
     async function checkToken() {
+      if (authInfo.token || authInfo.isLogined) return;
+
       const token = await readFromStorage("auth-token");
       if (!token) return;
 
@@ -27,7 +22,7 @@ export function useAuth() {
           token,
         },
       });
-      if (!data || error) return;
+      if (!data || error) return clearStorage();
       userAuthVar({ ...data.validateToken, isLogined: true });
     }
     checkToken();

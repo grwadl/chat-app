@@ -3,7 +3,7 @@ import LogInScreen from "@/screens/LogInScreen";
 import SignUpScreen from "@/screens/SignUpScreen";
 import React from "react";
 import { Text } from "react-native";
-import { useAuth } from "../navigation/hooks/useAuth";
+import { useAuth } from "./hooks/useAuth";
 import { Stack } from "./stack";
 
 const Routes = () => {
