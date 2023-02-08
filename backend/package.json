@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "lint": "./node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "format:lint": "npm run lint:fix && npm run format"
+    "format:lint": "npm run lint:fix && npm run format",
+    "prepare": "husky install"
   },
   "_moduleAliases": {
     "@src/*": "./dist/*",
@@ -49,6 +50,7 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.4",
     "prisma": "^4.9.0",
