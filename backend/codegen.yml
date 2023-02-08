@@ -1,6 +1,6 @@
 schema: typedefs/*
 generates:
-  src/types/index.ts:
+  src/generated-types/index.ts:
     plugins:
-      - "@graphql-codegen/typescript"
-      - "@graphql-codegen/typescript-resolvers"
+      - '@graphql-codegen/typescript'
+      - '@graphql-codegen/typescript-resolvers'

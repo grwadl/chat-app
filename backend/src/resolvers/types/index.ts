@@ -1,5 +1,9 @@
-import { MyContext } from "../..";
-import { RequireFields, Resolver, ResolverTypeWrapper } from "../../types";
+import { MyContext } from '@/src'
+import {
+  RequireFields,
+  Resolver,
+  ResolverTypeWrapper,
+} from '@src/generated-types'
 
 export type ResolverFunc<
   TResponse,
@@ -7,7 +11,7 @@ export type ResolverFunc<
   TParamName extends keyof TRequireFieldsArgs
 > = Resolver<
   ResolverTypeWrapper<TResponse>,
-  {},
+  Record<string, unknown>,
   MyContext,
   RequireFields<TRequireFieldsArgs, TParamName>
->;
+>

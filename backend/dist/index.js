@@ -17,7 +17,7 @@ const { json } = body_parser_1.default;
 const app = (0, express_1.default)();
 const httpServer = http_1.default.createServer(app);
 async function main() {
-    const typeDefs = (0, graphql_import_files_1.loadFiles)("./typedefs/*.{graphql, gql}");
+    const typeDefs = (0, graphql_import_files_1.loadFiles)('./typedefs/*.{graphql, gql}');
     const prisma = new client_1.PrismaClient();
     const server = new server_1.ApolloServer({
         typeDefs,
@@ -25,7 +25,7 @@ async function main() {
         plugins: [(0, drainHttpServer_1.ApolloServerPluginDrainHttpServer)({ httpServer })],
     });
     await server.start();
-    app.use("/graphql", (0, cors_1.default)(), json(), (0, express4_1.expressMiddleware)(server, {
+    app.use('/graphql', (0, cors_1.default)(), json(), (0, express4_1.expressMiddleware)(server, {
         context: async () => ({
             prisma,
         }),
