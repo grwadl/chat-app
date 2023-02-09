@@ -1,7 +1,6 @@
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
-import { Prisma, PrismaClient } from '@prisma/client'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
@@ -9,7 +8,6 @@ import { loadFiles } from 'graphql-import-files'
 import http from 'http'
 import { Environment } from './config'
 import { resolvers } from './resolvers'
-import prisma from './client'
 import rootService from './services'
 export interface MyContext {
   rootService: typeof rootService
