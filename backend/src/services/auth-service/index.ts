@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
-import { Environment } from '../../config'
-import { LogInInfo, LoginResponse, RegisterInfo } from '../../generated-types'
-import { Repository } from '../../repositories/types'
+import { Environment } from '@src/config'
+import { LogInInfo, LoginResponse, RegisterInfo } from '@src/generated-types'
+import { Repository } from '@src/repositories/types'
 import { CryptoService } from '../encryption-service/types'
 
 export default class AuthService {
