@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { RootStackParamList } from '../../navigation/types'
 
-type UserInfo = { userInfo: User }
+type UserInfo = { userInfo: Omit<User, 'id'> }
 type SingUpReturnType = { success: boolean }
 
 export function useSignUpMutation() {
