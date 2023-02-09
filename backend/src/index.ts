@@ -9,7 +9,7 @@ import { loadFiles } from 'graphql-import-files'
 import http from 'http'
 import { Environment } from './config'
 import { resolvers } from './resolvers'
-
+import prisma from './client'
 export interface MyContext {
   prisma: PrismaClient<
     Prisma.PrismaClientOptions,
@@ -24,8 +24,6 @@ const httpServer = http.createServer(app)
 
 async function main(): Promise<void> {
   const typeDefs = loadFiles('./typedefs/*.{graphql, gql}')
-
-  const prisma = new PrismaClient()
 
   const server = new ApolloServer<MyContext>({
     typeDefs,

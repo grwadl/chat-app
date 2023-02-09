@@ -11,6 +11,27 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   name  String
-  email String
+  email String  @unique
   password String
+  dialogues UserDialogues[]
+}
+
+model UserDialogues {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  dialogue Dialogue @relation(fields: [dialogueId], references: [id])
+  dialogueId Int
+}
+
+model Dialogue {
+  id Int @id @default(autoincrement())
+  users UserDialogues[]
+  messages Message[] 
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+  dialogue Dialogue @relation(fields: [dialogueId], references: [id])
+  dialogueId Int
 }

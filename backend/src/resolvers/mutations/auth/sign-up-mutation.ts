@@ -1,6 +1,12 @@
+import { MutationSignUpArgs, RegisterResponse } from '@/src/generated-types'
 import bcrypt from 'bcrypt'
+import { ResolverFunc } from '../../types'
 
-export const signUpResolver = async (_parent, args, { prisma }) => {
+export const signUpResolver: ResolverFunc<
+  RegisterResponse,
+  MutationSignUpArgs,
+  'userInfo'
+> = async (_parent, args, { prisma }) => {
   const {
     userInfo: { email, name, password },
   } = args
