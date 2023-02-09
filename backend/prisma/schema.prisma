@@ -13,25 +13,31 @@ model User {
   name  String
   email String  @unique
   password String
-  dialogues UserDialogues[]
+  dialogues UserChats[]
+  messages Message[]
 }
 
-model UserDialogues {
+model UserChats {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
   userId Int
-  dialogue Dialogue @relation(fields: [dialogueId], references: [id])
+  dialogue Chat @relation(fields: [dialogueId], references: [id])
   dialogueId Int
+	@@map("UserDialogues")
 }
 
-model Dialogue {
+model Chat {
   id Int @id @default(autoincrement())
-  users UserDialogues[]
+  users UserChats[]
   messages Message[] 
+	@@map("Dialogue")
 }
 
 model Message {
   id Int @id @default(autoincrement())
-  dialogue Dialogue @relation(fields: [dialogueId], references: [id])
+  dialogue Chat @relation(fields: [dialogueId], references: [id])
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
   dialogueId Int
+  text String
 }

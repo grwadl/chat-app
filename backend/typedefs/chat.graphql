@@ -1,0 +1,12 @@
+type Message {
+  id: Int
+  dialogue: Chat
+  author: User
+  text: String!
+}
+
+type Chat {
+  id: Int
+  users: [User]!
+  messages: [Message]!
+}

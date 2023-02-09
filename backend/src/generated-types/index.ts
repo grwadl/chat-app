@@ -14,6 +14,13 @@ export type Scalars = {
   Float: number;
 };
 
+export type Chat = {
+  __typename?: 'Chat';
+  id?: Maybe<Scalars['Int']>;
+  messages: Array<Maybe<Message>>;
+  users: Array<Maybe<User>>;
+};
+
 export type LogInInfo = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -28,6 +35,8 @@ export type LoginResponse = {
 export type Message = {
   __typename?: 'Message';
   author: User;
+  dialogue?: Maybe<Chat>;
+  id?: Maybe<Scalars['Int']>;
   text: Scalars['String'];
 };
 
@@ -49,14 +58,26 @@ export type MutationSignUpArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getKnownChats: Array<Maybe<Chat>>;
   messages: Array<Maybe<Message>>;
+  searchUsers: Array<Maybe<User>>;
   users?: Maybe<Array<Maybe<User>>>;
   validateToken: LoginResponse;
 };
 
 
+export type QueryGetKnownChatsArgs = {
+  userId: Scalars['Int'];
+};
+
+
 export type QueryMessagesArgs = {
   userName: Scalars['String'];
+};
+
+
+export type QuerySearchUsersArgs = {
+  query: Scalars['String'];
 };
 
 
@@ -157,6 +178,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Chat: ResolverTypeWrapper<Chat>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   LogInInfo: LogInInfo;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
   Message: ResolverTypeWrapper<Message>;
@@ -171,6 +194,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  Chat: Chat;
+  Int: Scalars['Int'];
   LogInInfo: LogInInfo;
   LoginResponse: LoginResponse;
   Message: Message;
@@ -182,6 +207,13 @@ export type ResolversParentTypes = {
   User: User;
 };
 
+export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  messages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType>;
+  users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type LoginResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = {
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -190,6 +222,8 @@ export type LoginResponseResolvers<ContextType = any, ParentType extends Resolve
 
 export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
   author?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  dialogue?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -200,7 +234,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getKnownChats?: Resolver<Array<Maybe<ResolversTypes['Chat']>>, ParentType, ContextType, RequireFields<QueryGetKnownChatsArgs, 'userId'>>;
   messages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType, RequireFields<QueryMessagesArgs, 'userName'>>;
+  searchUsers?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<QuerySearchUsersArgs, 'query'>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, Partial<QueryUsersArgs>>;
   validateToken?: Resolver<ResolversTypes['LoginResponse'], ParentType, ContextType, RequireFields<QueryValidateTokenArgs, 'token'>>;
 };
@@ -218,6 +254,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  Chat?: ChatResolvers<ContextType>;
   LoginResponse?: LoginResponseResolvers<ContextType>;
   Message?: MessageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

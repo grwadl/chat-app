@@ -2,7 +2,7 @@ import { Prisma, User } from '@prisma/client'
 import prisma from '../client'
 import { Repository } from './types'
 
-class UserRepository implements Repository<User> {
+export class UserRepository implements Repository<User> {
   async findMany(opt: Prisma.UserFindManyArgs): Promise<User[]> {
     return prisma.user.findMany(opt)
   }

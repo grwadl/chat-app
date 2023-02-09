@@ -1,12 +1,12 @@
+import { UserRepository } from '@/src/repositories/user-repository'
 import { User } from '@prisma/client'
-import { Environment } from '@src/config'
+import { Environment } from '../../config'
 import { LogInInfo, LoginResponse, RegisterInfo } from '@src/generated-types'
-import { Repository } from '@src/repositories/types'
 import { CryptoService } from '../encryption-service/types'
 
 export default class AuthService {
   constructor(
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
     private encryptionService: CryptoService
   ) {}
 
