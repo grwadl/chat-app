@@ -10,12 +10,9 @@ import http from 'http'
 import { Environment } from './config'
 import { resolvers } from './resolvers'
 import prisma from './client'
+import rootService from './services'
 export interface MyContext {
-  prisma: PrismaClient<
-    Prisma.PrismaClientOptions,
-    never,
-    Prisma.RejectOnNotFound | Prisma.RejectPerOperation
-  >
+  rootService: typeof rootService
 }
 
 const { json } = bodyParser
@@ -39,7 +36,7 @@ async function main(): Promise<void> {
     json(),
     expressMiddleware(server, {
       context: async () => ({
-        prisma,
+        rootService,
       }),
     })
   )
