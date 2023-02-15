@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { Chat } from '@/entities/chat'
+import { Chat as ChatType } from '@/entities/chat'
 
-type Props = Chat
+type Props = ChatType
 
 const Chat = ({ messages }: Props) => {
   const lastMessage = messages?.at(-1)
