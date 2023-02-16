@@ -10,6 +10,7 @@
     "dev": "nodemon -e ts,graphql -w ./src -x bash ./start.sh",
     "generate": "graphql-codegen",
     "format": "prettier --write .",
+    "debug": "npm run start --inspect",
     "lint": "./node_modules/.bin/eslint .",
     "lint:fix": "npm run lint -- --fix",
     "format:lint": "npm run lint:fix && npm run format",
